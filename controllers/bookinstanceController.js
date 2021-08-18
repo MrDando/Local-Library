@@ -169,7 +169,7 @@ exports.bookinstance_update_post = [
               .exec(function (err, books) {
                   if (err) { return next(err); }
                   // Successful, so render.
-                  res.render('bookinstance_form', { title: 'Create BookInstance', book_list: books, selected_book: bookinstance.book._id , errors: errors.array(), bookinstance: bookinstance });
+                  res.render('bookinstance_form', { title: 'Update Book Instance', book_list: books, selected_book: bookinstance.book._id , errors: errors.array(), bookinstance: bookinstance });
           });
           return;
       }
