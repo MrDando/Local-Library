@@ -32,6 +32,16 @@ AuthorSchema.virtual('lifespan').get(function() {
   return lifetime_string;
 });
 
+// Virtual for converting author's date of birth to 'YYYY-MM-DD' format
+AuthorSchema.virtual('date_of_birth_yyyy_mm_dd').get(function () {
+  return DateTime.fromJSDate(this.date_of_birth).toISODate();
+});
+
+// Virtual for converting author's date of death to 'YYYY-MM-DD' format
+AuthorSchema.virtual('date_of_death_yyyy_mm_dd').get(function () {
+  return DateTime.fromJSDate(this.date_of_death).toISODate();
+});
+
 // Virtual for author's URL
 AuthorSchema
 .virtual('url')
