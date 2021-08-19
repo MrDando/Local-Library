@@ -36,7 +36,7 @@ exports.bookinstance_detail = function(req, res, next) {
 };
 
 // Display BookInstance create form on GET.
-exports.bookinstance_create_get = function(req, res) {
+exports.bookinstance_create_get = function(req, res, next) {
     
     Book.find({}, 'title')
     .exec(function (err, books) {
@@ -90,7 +90,7 @@ exports.bookinstance_create_post = [
 ];
 
 // Display BookInstance delete form on GET.
-exports.bookinstance_delete_get = function(req, res) {
+exports.bookinstance_delete_get = function(req, res, next) {
   BookInstance.findById(req.params.id)
   .populate('book')
   .exec(function (err, bookinstance) {
@@ -106,7 +106,7 @@ exports.bookinstance_delete_get = function(req, res) {
 };
 
 // Handle BookInstance delete on POST.
-exports.bookinstance_delete_post = function(req, res) {
+exports.bookinstance_delete_post = function(req, res, next) {
   BookInstance.findByIdAndRemove(req.body.bookinstanceid, function deleteBookInstance(err) {
     if (err) { return next(err); }
     // Success - go to book list

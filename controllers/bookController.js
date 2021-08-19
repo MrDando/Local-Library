@@ -43,7 +43,7 @@ exports.book_list = function(req, res, next) {
   };
 
 // Display detail page for a specific book.
-exports.book_detail = function(req, res) {
+exports.book_detail = function(req, res, next) {
     async.parallel({
         book: function(callback) {
             Book.findById(req.params.id)
@@ -56,7 +56,7 @@ exports.book_detail = function(req, res) {
             .exec(callback)
         }
     }, function(err, results) {
-        if (err) { return neext(err)}
+        if (err) { return next(err)}
         if (results.book==null) {
             var err = new Error('Book not found')
             err.status = 404;
@@ -155,7 +155,7 @@ exports.book_create_post = [
 ];
 
 // Display book delete form on GET.
-exports.book_delete_get = function(req, res) {
+exports.book_delete_get = function(req, res, next) {
     
     async.parallel({
         book: function(callback) {
@@ -169,7 +169,7 @@ exports.book_delete_get = function(req, res) {
             .exec(callback)
         }
     }, function(err, results) {
-        if (err) { return neext(err)}
+        if (err) { return next(err)}
         if (results.book==null) {
             var err = new Error('Book not found')
             err.status = 404;
@@ -180,7 +180,7 @@ exports.book_delete_get = function(req, res) {
 };
 
 // Handle book delete on POST.
-exports.book_delete_post = function(req, res) {
+exports.book_delete_post = function(req, res, next) {
     async.parallel({
         book: function(callback) {
             Book.findById(req.params.bookid)
@@ -193,7 +193,7 @@ exports.book_delete_post = function(req, res) {
             .exec(callback)
         }
     }, function(err, results) {
-        if (err) { return neext(err)}
+        if (err) { return next(err)}
         if (results.book_instances.length > 0) {
             // Book has instances. Render in same way as for GET route.
             res.render('book_delete', {title: results.book.title, book: results.book, bookinstance_list: results.book_instance});

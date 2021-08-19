@@ -15,7 +15,7 @@ exports.author_list = function(req, res) {
 };
 
 // Display detail page for a specific Author.
-exports.author_detail = function(req, res) {
+exports.author_detail = function(req, res, next) {
 
     async.parallel({
         author: function(callback) {
@@ -136,7 +136,7 @@ exports.author_delete_post = function(req, res, next) {
 };
 
 // Display Author update form on GET.
-exports.author_update_get = function(req, res) {
+exports.author_update_get = function(req, res, next) {
     Author.findById(req.params.id)
         .exec(function (err, author) {
             if (err) { return next(err) }
